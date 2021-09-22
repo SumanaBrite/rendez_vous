@@ -180,6 +180,11 @@
 			width: 12rem;
     
 		}
+		.menubar{
+			background-color: red;
+			font-family: 'Times New Roman', Times, serif;
+			font-size: 1rem;
+		}
 		.dropdown-item{
 			/* border-bottom:.25rem solid var(--primary); */
 		}
