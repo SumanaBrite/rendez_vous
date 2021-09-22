@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HoraireFermetureGuichet{% endblock %}
+
+{% block body %}
+    <h1>HoraireFermetureGuichet</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ horaire_fermeture_guichet.id }}</td>
+            </tr>
+            <tr>
+                <th>Jour</th>
+                <td>{{ horaire_fermeture_guichet.jour ? horaire_fermeture_guichet.jour|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('horaire_fermerguichet_index') }}">back to list</a>
+
+    <a href="{{ path('horaire_fermerguichet_edit', {'id': horaire_fermeture_guichet.id}) }}">edit</a>
+
+    {{ include('horaire_fermeture_guichet/_delete_form.html.twig') }}
+{% endblock %}

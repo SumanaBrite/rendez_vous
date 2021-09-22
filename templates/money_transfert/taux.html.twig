@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Taux{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">TAUX DU JOUR</h1>
+
+    <table class="table table-bordered table-transfert bg-dark">
+        <thead class="">
+            <tr>
+                <th>Pays</th>
+                <th><img src="/images/uploads/r1.jpg" class="img-transfert"alt="RIA"> </th>
+                <th><img src="/images/uploads/mg.jpg" class="img-transfert"alt="MoneyGram"> </th>
+                <th> <img src="/images/uploads/wu1.png" class="img-transfert"alt="Western Union"></th>
+            </tr>
+        </thead>  
+        <tbody>
+        {% for money_transfert in money_transferts %}
+            <tr>
+                <td> <img src="/images/uploads/{{ money_transfert.path }}" class="img-flag" alt="{{ money_transfert.path }}"><h3>{{ money_transfert.pays }}</h3> </td>
+                {# <td>{{ money_transfert.path }}</td> #}
+                <td>{{ money_transfert.ria }}</td>
+                <td>{{ money_transfert.moneyGram }}</td>
+                <td>{{ money_transfert.westernUnion }}</td>
+                
+            </tr>
+        {% else %}
+            
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

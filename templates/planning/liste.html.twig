@@ -1,0 +1,114 @@
+   <div class ="container">
+    <table class="table table table-bordered table-striped align-center">
+		<thead>
+			<tr>
+                <th>Horaires</th>
+                {% set jour = jour1  %}
+
+                {% for jour in jours %}
+					<th> {{  jour | date("l m/d/Y") }}</th>
+                {% endfor %}
+			</tr>
+		</thead>
+
+
+		<tbody>
+     {# {% if  null == app.user  %}
+         <p> Veuillez-vous vous connecter pour réserver un créneau </p>
+     {% endif %} #}
+     
+<input type="text">
+<label for="prenom"></label>
+<input type="text">
+<label for="nom"></label>
+<input type="email">
+<label for="email"></label>
+
+                {% for horaire in horaires %}
+                   <tr>
+                   <td>{{  horaire.nom }}</td>
+					
+                   
+                    {% for jour in jours %}
+                         {% set jourSelected = jour|date("m.d.Y") %} 
+                        {% set nbCreneau = 0 %}
+
+                         <td>
+                            <div>
+                                <form method="post" action="{{ path('fiche_rdv' , {'idH': horaire.id , 'jour': jourSelected,
+                                                           
+                                                            })  }}">
+                                
+                                {% for calendrier in calendriers  %}
+                                    {% if ( horaire.nom == calendrier.horaire and
+                                         calendrier.jour == jour ) %}
+                                        {% set nbCreneau = nbCreneau + 1 %}
+                                
+                                    {% endif %}
+                        
+                         
+                                {% endfor %} 
+
+                                {% if nbCreneau > 0  %}
+
+                                     {% set nbCreneau = 0 %}
+                                    {% for calendrier in calendriers  %}
+                                        {% if ( horaire.nom == calendrier.horaire and
+                                            calendrier.jour == jour ) %}
+                                           
+                                            <div>
+
+                                             {% if nbCreneau ==  0  %}
+                                        <input type="radio" id="RAD~{{ nbCreneau }}" checked="checked"  name="creneau" 
+        value=
+        "horaire-->{{ calendrier.horaire }}~horaireId-->{{ calendrier.horaireId }}~jour-->{{ calendrier.jour|date('Y-m-d') }}~creneau-->{{ calendrier.creneau }}~creneauId-->{{ calendrier.creneauId }}">
+       
+                                             {% else %}
+                                             <input type="radio" id="RAD~{{ nbCreneau }}" name="creneau" 
+        value=
+        "horaire-->{{ calendrier.horaire }}~horaireId-->{{ calendrier.horaireId }}~jour-->{{ calendrier.jour|date('Y-m-d') }}~creneau-->{{ calendrier.creneau }}~creneauId-->{{ calendrier.creneauId }}">
+       
+                                            {% endif %}
+        <label for="RAD~{{ nbCreneau }}">{{ horaire.nom }} de {{ calendrier.creneau }}</label>
+                                           </div>
+                                            {% set nbCreneau = nbCreneau + 1 %}
+                                        {% endif %}
+                            
+                            
+                                {% endfor %} 
+                                   
+                                    {# {% if is_granted("IS_AUTHENTICATED_FULLY") %}   #}
+                            
+                                        {% if nbCreneau > 0  %}
+                                
+                                        {# {% set jourSelected = calendrier.jour|date("m/d/Y") %} #}
+                                            {# <button class="btn btn-secondary" type="submit">Réserver</button> #}
+                                            <input class="btn btn-secondary" type="submit" value="Réserver">
+
+                                        {% endif %}  
+                            
+                                    {# {% endif %} #}
+                                
+                                {% else %}
+                                     <div> Pas de créneau disponible</div>
+                                {% endif %}
+                                </form>
+                                
+                            </div>
+                            <div>
+                                
+                            </div>
+                        </td>
+                         
+
+                    {% endfor  %}
+                     
+                
+				    </tr>
+                {% endfor %}
+        
+                
+		</tbody>
+
+	</table>
+    </div>

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit HoraireFermetureGuichet{% endblock %}
+
+{% block body %}
+    <h1>Edit HoraireFermetureGuichet</h1>
+
+    {{ include('horaire_fermeture_guichet/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('horaire_fermerguichet_index') }}">back to list</a>
+
+    {{ include('horaire_fermeture_guichet/_delete_form.html.twig') }}
+{% endblock %}

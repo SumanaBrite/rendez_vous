@@ -1,0 +1,143 @@
+<div class="container-fluid dark">
+	<nav class="menu-header navbar navbar-expand-lg navbar-dark ">
+		<ul class="list-unstyled text mb-6 mb-md-8 mb-lg-0">
+			<li class="social-icon list-group-item">
+				<i class="fab fa-facebook"></i>
+			</li>
+			<li class="social-icon list-group-item">
+				<i class="fab fa-twitter"></i>
+			</li>
+			<li class="social-icon list-group-item">
+				<i class="fab fa-instagram"></i>
+			</li>
+		</ul>
+
+		<div
+			class="col-12 col-md-6 col-lg-4">
+			{# <div class="row"> #}
+
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+
+			<div class="row collapse navbar-collapse" id="navbarNavDropdown">
+
+
+				<ul class="navbar-nav list-unstyled text mb-6 mb-md-8 				mb-lg-0">
+					<li class="nav-item dropdown">
+						<a class="navbar-brand  nav-menu" href={{ path("home") }}>
+							<i class="fas fa-home"></i>
+							Acceuil
+						</a>
+
+					</li>
+					<li class="nav-item dropdown  ">
+						<a class="navbar-brand nav-menu justify-content-between dropdown-toggle" href="#" data-bs-toggle="dropdown">
+							Boucherie
+						</a>
+						<ul class="dropdown-menu list-unstyled text mb-6 mb-md-8 mb-lg-0">
+							<li>
+								{# <a class="dropdown-item" href=" {{path("agneau"), {'categorie': 'Agneau'}) }}"> #}
+								<a class="dropdown-item" href=" {{path("liste_boucherie"), {'categorie': 'Agneau'}) }}">
+									L'agneau</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{path("liste_boucherie"), {'categorie': 'Boeuf'}) }}">
+									Boeuf
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{path("liste_boucherie"), {'categorie': "Veau"}) }}">
+									Veau
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{path("liste_boucherie"), {'categorie': 'Volailles'}) }}">
+									Volaille
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{path("liste_boucherie"), {'categorie': 'Barbecue'}) }}">
+									Barbecue
+								</a>
+							</li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="navbar-brand  nav-menu" href={{ path("planning") }}>
+							Transfert d'argent
+						</a>
+
+					</li>
+					<li class="nav-item dropdown">
+						<a class="navbar-brand nav-menu" href="{{ path("fastfood") }}">
+							Fast Food
+						</a>
+
+					</li>
+					<li class="nav-item dropdown">
+						<a class="navbar-brand  nav-menu" href="{{ path("pointrelais") }}">
+							Point Relais</a>
+
+					</li>
+
+					<li class="nav-item dropdown">
+						<a class="navbar-brand  nav-menu" href="{{path("coiffeur") }}">
+							Coiffeur
+						</a>
+
+					</li>
+				{% if is_granted("ROLE_ADMIN") %}
+
+					<li class="nav-item dropdown  ">
+						<a class="navbar-brand nav-menu justify-content-between dropdown-toggle" href="#" data-bs-toggle="dropdown">
+							Administration
+						</a>
+						<ul class="dropdown-menu list-unstyled text mb-6 		mb-md-8 mb-lg-0">
+
+
+							<ul>
+								<li>
+									<a href="#">Boucherie</a>
+									<ul>
+										<li><a href="{{path("article_boucherie_index") }}">Article Boucherie</a></li>
+										<li><a href="{{path("categorie_boucherie_index") }}">Categorie Boucherie</a></li>
+										<li><a href="{{path("measure_index") }}">Measure</a></li>
+										<li><a href="{{path("taux_tva_index") }}">Taux TVA</a></li>
+									</ul>
+								</li>
+ 
+								<li>
+									<a href="#">Fast Food</a>
+									<ul>
+										<li><a href="{{path("article_fast_food_index") }}">Article Fast Food</a></li>
+										<li><a href="{{path("categorie_fast_food_index") }}">Categorie Fast Food</a></li>
+										<li><a href="{{path("unite_fast_food_index") }}">Measure</a></li>
+										{# <li><a href="{{path("menu_fast_food_index") }}">Menu FastFood</a></li> #}
+									</ul>
+								</li>
+								<li>
+									<a href="#">Rendez-Vous</a>
+									<ul>
+										<li><a href="{{path("rdv_index") }}">Liste des RDV</a></li>
+										<li><a href="{{path("jour_fermerguichet_index") }}">Jour fermeture de Guichet</a></li>
+										<li><a href="{{path("horaire_fermerguichet_index") }}">Horaires fermeture de Guichet</a></li>
+										<li><a href="{{path("guichet_index") }}">Liste des Guichets</a></li>
+										<li><a href="{{path("horaire_index") }}">Liste des Horaires</a></li>
+										<li><a href="{{path("creneau_index") }}">Creneau des Horaires</a></li>
+									</ul>
+								</li>
+							</ul>
+
+
+						</ul>
+					</li>
+					{% endif %}
+				</ul>
+			</div>
+
+		</div>
+
+	</nav>
+</div>

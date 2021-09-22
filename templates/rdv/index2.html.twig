@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rdv index{% endblock %}
+
+{% block body %}
+    <h1>Mes Rdv index</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Jour</th>
+                <th>Horaire</th>
+                <th>Créneau</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set nb = 0 %}
+        {% for rdv in rdvs %}
+            {% if  (  rdv.jour >= today ) %}
+              {% set nb = nb + 1 %}
+                 <tr>
+                    <td>{{ rdv.id }}</td>
+                    <td>{{ rdv.jour ? rdv.jour|date('Y-m-d') : '' }}</td>
+                    <td>{{ rdv.horaire.nom }}</td>
+                    <td>{{ rdv.creneau.description }}</td>
+                    <td>
+                        {# <a href="{{ path('rdv_show', {'id': rdv.id}) }}">show</a> #}
+                        <a href="{{ path('rdv_show_user', {'id': rdv.id}) }}">Suppression</a>
+                    </td>
+                </tr>
+            {% endif %}
+         {% endfor %}
+        {% if nb == 0 %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Fiche RDV
+{% endblock %}
+
+
+
+{% block body %}
+
+<h1>Fiche RDV </h1>
+<p>Vous avez  rdv ...........</p>
+<div class="jumbotron">
+<form action="">
+  <label for="fname">First name:</label>
+  <input type="text" id="fname" name="fname" value="John"><br><br>
+  <label for="lname">Last name:</label>
+  <input type="text" id="lname" name="lname" value="Doe"><br><br>
+  <label for="email">Enter your email:</label>
+  <input type="email" id="email" name="email"><br><br>
+  <input type="submit" value="Submit"><br>
+  <p>Veuillez confirmer vôtre rdv par retour de email</p>
+</form><br> 
+</div>
+{% endblock %}

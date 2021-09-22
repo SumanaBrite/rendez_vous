@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New HoraireFermetureGuichet{% endblock %}
+
+{% block body %}
+    <h1>Create new HoraireFermetureGuichet</h1>
+
+    {{ include('horaire_fermeture_guichet/_form.html.twig') }}
+
+    <a href="{{ path('horaire_fermerguichet_index') }}">back to list</a>
+{% endblock %}

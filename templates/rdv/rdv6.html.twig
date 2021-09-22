@@ -1,0 +1,46 @@
+
+
+
+    <h1>Rdv du Guichet 6</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Jour</th>
+                <th>Horaire</th>
+                <th>Creneau</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% set nb1 = 0 %}
+        {% for rdv in rdvs %}
+           {% if  ( rdv.guichet.id == 6   and rdv.jour >= today ) %}
+              {% set nb1 = nb1 + 1 %}
+            <tr>
+                <td>{{ rdv.id }}</td>
+                <td>{{ rdv.jour ? rdv.jour|date('Y-m-d') : '' }}</td>
+                <td>{{ rdv.horaire.nom }}</td>
+                <td>{{ rdv.creneau.description }}</td>
+                <td>
+                    <a href="{{ path('rdv_show', {'id': rdv.id}) }}">show</a>
+                    <a href="{{ path('rdv_edit', {'id': rdv.id}) }}">edit</a>
+                </td>
+            </tr>
+            {% endif %}
+        
+            
+        {% endfor %}
+        {% if nb1 == 0 %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+        
+        {% endif %}
+    
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('rdv_new') }}">Create new</a>

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HoraireFermetureGuichet index{% endblock %}
+
+{% block body %}
+    <h1>HoraireFermetureGuichet index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Jour</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for horaire_fermeture_guichet in horaire_fermeture_guichets %}
+            <tr>
+                <td>{{ horaire_fermeture_guichet.id }}</td>
+                <td>{{ horaire_fermeture_guichet.jour ? horaire_fermeture_guichet.jour|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('horaire_fermerguichet_show', {'id': horaire_fermeture_guichet.id}) }}">show</a>
+                    <a href="{{ path('horaire_fermerguichet_edit', {'id': horaire_fermeture_guichet.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('horaire_fermerguichet_new') }}">Create new</a>
+{% endblock %}

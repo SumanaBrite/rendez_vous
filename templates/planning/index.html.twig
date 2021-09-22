@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Planning
+{% endblock %}
+{% block body %}
+
+
+	<div class="container">
+
+
+		<h1 class="text-center">Planning de la semaine</h1>
+
+
+
+		{# <pre>
+			{{ dump( jours ) }}
+
+		</pre> #}
+		<div class="jumbotron">
+		
+			<div class="row">
+				
+				<div class="col-10">
+				{% include "planning/liste.html.twig" %}
+				</div>
+				
+				
+
+			</div >
+		</div>
+
+	<div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rdv index{% endblock %}
+
+{% block body %}
+    <h1>Liste des Rdvs </h1>
+
+    <div class="container-fluid layout-bg tab-container">
+
+		<div class="row">
+			
+			<div class="nav-tab-primary p-2 h-100">
+			
+				<ul class="nav nav-tabs justify-content-start mb-0" id="pills-tab" role="tablist">
+                    {% set nbr = 0 %}
+                    {% for guichet in guichets %}
+                    
+                        {% if nbr == 0 %}
+                    
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="un-tab" data-bs-toggle="tab" data-bs-target="{{ '#TAB' ~ guichet.id}}"
+                                type="button" role="tab" aria-controls="tab1" aria-selected="true"> {{ guichet.nom }} </button>
+                            </li>
+                             {% set nbr = nbr + 1 %}
+                        {% else %}
+                            
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="deux-tab" data-bs-toggle="tab" data-bs-target="{{ '#TAB' ~ guichet.id}}" 
+                                type="button" role="tab" aria-controls="tab2" aria-selected="false">{{ guichet.nom }} </button>
+                            </li>
+                              {% set nbr = nbr + 1 %}
+                        {% endif %}
+                  
+                    {% endfor %}
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    {% set nbr = 0 %}
+                    {% for guichet in guichets %}
+                        {% if nbr == 0 %}
+                            <div class="tab-pane fade show active" id="{{ 'TAB' ~  guichet.id}}" role="tabpanel" aria-labelledby="home-tab">
+                                {{ include('rdv/rdv.html.twig') }}
+                            </div>
+                            {% set nbr = nbr + 1 %}
+                        {% else %}
+                        
+                            <div class="tab-pane fade" id="{{ 'TAB' ~ guichet.id}}" role="tabpanel" aria-labelledby="profile-tab">
+                                {{ include('rdv/rdv.html.twig') }}
+                            </div>
+                          {% set nbr = nbr + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                   
+                </div>
+			</div> 
+			
+        </div>
+    </div>
+
+{% endblock %}

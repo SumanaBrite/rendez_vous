@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}JourFermetureGuichet{% endblock %}
+
+{% block body %}
+    <h1>JourFermetureGuichet</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ jour_fermeture_guichet.id }}</td>
+            </tr>
+            <tr>
+                <th>Jour</th>
+                <td>{{ jour_fermeture_guichet.jour ? jour_fermeture_guichet.jour|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('jour_fermerguichet_index') }}">back to list</a>
+
+    <a href="{{ path('jour_fermerguichet_edit', {'id': jour_fermeture_guichet.id}) }}">edit</a>
+
+    {{ include('jour_fermeture_guichet/_delete_form.html.twig') }}
+{% endblock %}

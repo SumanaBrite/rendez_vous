@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Guichet{% endblock %}
+
+{% block body %}
+    <h1>Edit Guichet</h1>
+
+    {{ include('guichet/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('guichet_index') }}">back to list</a>
+
+    {{ include('guichet/_delete_form.html.twig') }}
+{% endblock %}

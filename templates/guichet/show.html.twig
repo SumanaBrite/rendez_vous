@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Guichet{% endblock %}
+
+{% block body %}
+    <h1>Guichet</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ guichet.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ guichet.nom }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <a href="{{ path('guichet_index') }}">back to list</a>
+
+    <a href="{{ path('guichet_edit', {'id': guichet.id}) }}">edit</a>
+
+    {{ include('guichet/_delete_form.html.twig') }}
+{% endblock %}

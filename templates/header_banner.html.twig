@@ -1,0 +1,141 @@
+<br>
+<h1 class="text-center">Ganapathy</h1>
+<div class="menubar">
+	<nav class=" menu-header navbar navbar-expand-lg navbar-dark ">
+		<div class="row col-12 col-md-6 col-lg-4">
+		<div class="d-block d-md-none col-6"> 
+				<ul>
+					<img src="/images/uploads/logo1.jpg" alt="logo" class="logo-footer img-fluid mb-2"><h1>Ganapathy</h1>
+				</ul>
+		</div>
+		<div class="row navbar-collapse col-6" id="navbarNavDropdown">
+				<ul class="navbar-nav list-unstyled text mb-6 mb-md-8 mb-lg-0 col-sm-0">
+					
+
+					<li class="address text-white">
+						<a target="_blank" href="https://www.google.com/search?q=172+avenue+jean+jaur%C3%A8s+93000+bobigny&rlz=1C1CHBF_frFR863FR865&sxsrf=ALeKk00rYwOtVyylWdpwQDD9ZQJaujCt1g%3A1628717157348&ei=ZUAUYZW7FPGSjLsP7au30A0&oq=172+A&gs_lcp=Cgdnd3Mtd2l6EAEYATIKCAAQgAQQhwIQFDIFCAAQywEyBQgAEMsBMgUIABDLATIFCAAQywEyBQgAEMsBMgUIABDLATIFCAAQywEyBQgAEMsBMgUIABDLAToHCAAQRxCwAzoECCMQJzoGCAAQFhAeOggIABAWEAoQHjoHCCMQ6gIQJzoFCAAQkQI6BQgAEIAEOgUILhCABDoLCC4QgAQQxwEQrwE6DgguEIAEEMcBEK8BEJMCOgQIABAKSgQIQRgAUPSyAViF7QFg0JgCaANwAngEgAGMAogBmhCSAQYxLjEwLjKYAQCgAQGwAQrIAQPAAQE&sclient=gws-wiz "><i class="fa fa-map-marker"></i>
+							172AvenueJeanJaures,93000 Bobigny</a>
+					</li>
+				</li>
+				
+				<li>
+					<a class="navbar-brand  nav-menu" href="">
+						<i class="fa fa-phone"></i>
+						+33951873063
+					</a>
+
+				</li>
+				{% if is_granted("IS_AUTHENTICATED_FULLY") %}
+					<li>
+						<a class="navbar-brand  nav-menu" href="{{path("app_logout") }}">
+							<i class="fa fa-sign-out-alt"></i>
+							Déconnexion
+						</a>
+
+					</li>
+					
+					<li>
+						<a class="navbar-brand  nav-menu" href="">
+							Vos Rendez-vous
+						</a>
+					</li>
+				{% else %}
+
+					<li>
+						<a class="navbar-brand  nav-menu" href={{ path("app_login") }}>
+							<i class="fa fa-sign-out-alt  "></i>
+							Connexion
+						</a>
+
+					</li>
+					<li>
+						<a class="navbar-brand  nav-menu" href={{ path("app_register") }}>
+							<i class="fa fa-door-open  "></i>
+							Inscription
+						</a>
+					</li>
+
+
+				{% endif %}
+				<li>
+						<a class="navbar-brand  nav-menu" href={{ path("contact") }}><i class="fas fa-file-signature"></i>
+							contact
+						</a>
+					</li>
+				{% if is_granted("ROLE_ADMIN") %}
+					<li class="nav-item dropdown  ">
+						<a class="navbar-brand nav-menu justify-content-between dropdown-toggle" href="#" data-bs-toggle="dropdown">
+							Admin
+						</a>
+						<ul class="dropdown-menu list-unstyled text mb-6 mb-md-8 mb-lg-0">
+							<li class="dropdown-item">
+								<a href="{{ path("money_transfert_index") }}">
+									Money Transfert
+								</a>
+
+							</li>
+							<li class="dropdown-item">
+								<a href="#">Boucherie</a>
+								<ul>
+									<li><a href="{{path("article_boucherie_index") }}">Article Boucherie</a></li>
+									<li><a href="{{path("categorie_boucherie_index") }}">Categorie Boucherie</a></li>
+									<li><a href="{{path("measure_index") }}">Measure</a></li>
+									<li><a href="{{path("taux_tva_index") }}">TVA</a></li>
+								</ul>
+							</li>
+
+							
+							<li class="dropdown-item">
+								<a href="#">Rendez-Vous</a>
+								<ul>
+									<li><a href="{{path("rdv_index") }}">Liste des RDV</a></li>
+									<li><a href="{{path("jour_fermerguichet_index") }}">Jour fermeture de Guichet</a></li>
+									<li><a href="{{path("horaire_fermerguichet_index") }}">Horaires fermeture de Guichet</a></li>
+									<li><a href="{{path("guichet_index") }}">Liste des Guichets</a></li>
+									<li><a href="{{path("horaire_index") }}">Liste des Horaires</a></li>
+									<li><a href="{{path("creneau_index") }}">Creneau des Horaires</a></li>
+								</ul>
+
+
+							</li>
+
+						</ul>
+					</li>
+				
+					<li class="nav-item dropdown">
+						<a class="navbar-brand nav-menu justify-content-between dropdown-toggle" href="#" data-bs-toggle="dropdown">
+							Abonné
+						</a>
+
+						<ul class="dropdown-menu">
+							<li>
+								<a class="dropdown-item" href=" {{path("user_index") }}">
+									Liste</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="{{path("user_new") }}">
+									Ajouter
+								</a>
+							</li>
+						</ul>
+					</li>
+
+				{% endif %}
+
+
+				
+			</ul>
+		</li>
+	</ul>
+</div></nav>
+{% include "menu.html.twig" %}
+</div></div></div>
+<div class="container">
+   {% for classStyle, messages in app.flashes %}
+     <div class="alert alert-{{ classStyle }}">
+       {% for message in messages %}
+         <p>{{ message }}</p>
+       {% endfor %}
+     </div>
+   {% endfor %}
+</div>

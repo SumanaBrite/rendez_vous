@@ -1,0 +1,187 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Planning
+{% endblock %}
+
+{% block body %}
+	<h1>Planning de </h1>
+	<div class="jumbotron">
+
+		<table class="table table table-bordered table-striped">
+			<thead>
+				<tr>
+                <th>Lundi</th>
+					<th>Guichet 1</th>
+					<th>Guichet 2</th>
+					<th>Guichet 3</th>
+					<th>Guichet 4</th>
+					<th>Guichet 5</th>
+					<th>Guichet 6</th>
+					<th>Guichet 7</th>
+					
+				</tr>
+			</thead>
+
+
+			<tbody>
+				<tr>
+					<td>8h00</td>
+					<td>reservé</td>
+					<td>reservé</td>
+					<td><a class ="btn-success" href="{{ path("fiche_rdv") }}">disponible</a></td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+				</tr>
+                <tr>
+					<td>8h15</td>
+					<td>reservé</td>
+					<td>reservé</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+				</tr>
+                <tr>
+					<td>8h30</td>
+					<td>reservé</td>
+					<td>reservé</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+				</tr>
+                <tr>
+					<td>8h45</td>
+					<td>reservé</td>
+					<td>reservé</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+				</tr>
+                            
+			</tbody>
+
+		</table>
+        </div>
+
+		{# <div class="jumbotron">
+	<div class="d-flex align-items-start">
+  <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Lundi</button>
+    <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Mardi</button>
+    <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Mercredi</button>
+    <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Jeudi</button>
+	<button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Vendredi</button>
+	<button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Samedi</button>
+	<button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Dimanche</button>
+  </div>
+  <div class="tab-content" id="v-pills-tabContent">
+    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+	<table class="table table table-bordered table-striped">
+			<thead>
+				<tr>
+                <th>horaires</th>
+					<th>8h00-9h00</th>
+					<th>9h00-10h00</th>
+					<th>8h00-9h00</th>
+					<th>8h00-9h00</th>
+					<th>8h00-9h00</th>
+					<th>8h00-9h00</th>
+					<th>8h00-9h00</th>
+					<th>8h00-9h00</th>
+					<th>8h00-9h00</th>
+					<th>8h00-9h00</th>
+					<th>8h00-9h00</th>
+					<th>8h00-9h00</th>
+					<th>8h00-9h00</th>
+										
+				</tr>
+			</thead>
+
+
+			<tbody>
+				<tr>
+					<td>Guichet 1</td>
+					<td>reservé</td>
+					<td>reservé</td>
+					<td> <a href="{{ path("planning_rdv") }}"></a> disponible </td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					
+				</tr>
+                <tr>
+					<td>Guichet 2</td>
+					<td>reservé</td>
+					<td>reservé</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+				</tr>
+                <tr>
+					<td>Guichet 3</td>
+					<td>reservé</td>
+					<td>reservé</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+				</tr>
+                <tr>
+					<td>Guichet 4</td>
+					<td>reservé</td>
+					<td>reservé</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+					<td>disponible</td>
+				</tr>
+                            
+			</tbody>
+
+		</table>
+
+	</div>
+    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">bbbb</div>
+    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">cccc</div>
+    <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">dddd</div>
+  </div>
+</div>
+</div> #}
+
+	{% endblock %}
