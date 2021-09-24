@@ -1,6 +1,6 @@
 :root
 		{
-			--primary: rgba(185, 45, 50, 0.863);
+			--primary: rgba(199, 45, 50, 0.863);
 			--background:rgba(189, 162, 163, 0.863);
 			--background-lite: #e6ebd5;
 			--background-dark: #525305;
@@ -180,10 +180,15 @@
 			width: 12rem;
     
 		}
-		.menubar{
-			background-color: red;
+		h1{
+			color:rgb(223, 74, 74);
+			font-weight: 900;
 			font-family: 'Times New Roman', Times, serif;
-			font-size: 1rem;
+		}
+		.menubar{
+			background-color: rgb(231, 154, 154);
+			font-family: 'Times New Roman', Times, serif;
+			
 		}
 		.dropdown-item{
 			/* border-bottom:.25rem solid var(--primary); */

@@ -1,29 +1,22 @@
-   <div class ="container">
-    <table class="table table table-bordered table-striped align-center">
+   
+    <table class="table table table-bordered table-striped">
 		<thead>
 			<tr>
                 <th>Horaires</th>
                 {% set jour = jour1  %}
 
                 {% for jour in jours %}
-					<th> {{  jour | date("l m/d/Y") }}</th>
+                    
+					<th> {{  jour | date("l m/d/Y") | replace({'Monday': 'Lundi', 'Tuesday': "Mardi", 'Wednesday':'Mercredi',
+                                                     'Thursday': 'Jeudi', 'Friday':'Vendredi',
+                                                     'Saturday':'Samedi', 'Sunday':'Dimanche'} ) }}</th>
+
                 {% endfor %}
 			</tr>
 		</thead>
 
 
 		<tbody>
-     {# {% if  null == app.user  %}
-         <p> Veuillez-vous vous connecter pour réserver un créneau </p>
-     {% endif %} #}
-     
-<input type="text">
-<label for="prenom"></label>
-<input type="text">
-<label for="nom"></label>
-<input type="email">
-<label for="email"></label>
-
                 {% for horaire in horaires %}
                    <tr>
                    <td>{{  horaire.nom }}</td>
@@ -35,8 +28,9 @@
 
                          <td>
                             <div>
-                                <form method="post" action="{{ path('fiche_rdv' , {'idH': horaire.id , 'jour': jourSelected,
-                                                           
+                                {# <form method="post" action="{{ path('fiche_rdv' , {'idH': horaire.id , 'jour': jourSelected #}
+                                <form method="post" action="{{ path('get_email' , {'idH': horaire.id , 'jour': jourSelected
+                                                         
                                                             })  }}">
                                 
                                 {% for calendrier in calendriers  %}
@@ -75,7 +69,7 @@
                                         {% endif %}
                             
                             
-                                {% endfor %} 
+                                    {% endfor %} 
                                    
                                     {# {% if is_granted("IS_AUTHENTICATED_FULLY") %}   #}
                             
@@ -111,4 +105,3 @@
 		</tbody>
 
 	</table>
-    </div>

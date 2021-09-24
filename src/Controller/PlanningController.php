@@ -5,6 +5,7 @@ namespace App\Controller;
 use DateTime;
 use DateInterval;
 use App\Entity\Rdv;
+use DateTimeInterface;
 use App\Entity\Creneau;
 use App\Entity\Horaire;
 use App\Service\Calendrier;
@@ -87,7 +88,7 @@ class PlanningController extends AbstractController
     }
 
     /**
-     * @Route("/planning/rdv/", name="fiche_rdv")
+     * @Route("/planning/rdv/{horaireIdSelected}/{jourSelected}/{creneauIdSelected}/", name="fiche_rdv")
      */
     public function rdv(
         Request $request,
@@ -98,45 +99,25 @@ class PlanningController extends AbstractController
         HoraireFermetureGuichetRepository $HFGuichetRepo,
         JourFermetureGuichetRepository $JFGuichetRepo,
         Calendrier  $cal,
-        SendContactCommand $sendContact
+        SendContactCommand $sendContact,
+        $horaireIdSelected , 
+        $jourSelected ,
+        $creneauIdSelected
+
     ): Response
-    //public function rdv( string $jourSelected , Horaire $horaireSelected , Creneau $creneauSelected ): Response
-
+  
     {
-        // on récupère les données de $_POST
-        $tempPost = $request->request->get('creneau');
-        // on transforme en tableau
-        $creneauBrut = explode('~', $tempPost);
-        // puis en tableau associatif
+        $nom = "";
+        $prenom = "";
+        $email = "";
+        $prenom = $request->request->get('prenom');
+        $nom = $request->request->get('nom');
+        $email = $request->request->get('email');
+       // dd( $horaireIdSelected, $jourSelected , $creneauIdSelected, $prenom, $nom , $email );
+ 
         $creneau = [];
-        //dd($creneauBrut);
-        foreach ($creneauBrut as $index => $element) {
-            $temp = explode('-->', $element);
-            // $creneau[$temp[0]] = $temp[1];
-            // "horaire-->{{ calendrier.horaire }}~horaireId-->{{ calendrier.horaireId }}~jour-->{{ calendrier.jour|date('Y-m-d') }}
-            //~creneau-->{{ calendrier.creneau }}~creneauId-->{{ calendrier.creneauId }}">{{ calendrier.creneau }}</option>
+   
 
-            if ($index == 0) {
-                $horaireNomSelected = $temp[1]; //$element;
-            }
-            if ($index == 1) {
-                $horaireIdSelected = $temp[1]; //$element;
-            }
-            if ($index == 2) {
-                $jourSelected = $temp[1]; //$element;
-                // $jour = date_create_from_format('Y-m-d', $jourSelected  );
-                //dd(  $element ,  $jourSelected , $jour , $horaireNomSelected , $horaireIdSelected);
-            }
-            if ($index == 3) {
-                $creneauNomSelected = $temp[1]; //$element;
-            }
-            if ($index == 4) {
-                $creneauIdSelected = $temp[1]; // $element;
-            }
-        }
-
-        // si tu es pointilleuse tu voudra récupérer un objet date et l'utilisateur
-        // $jour = date_create_from_format('Y-m-d', $jourSelected  ); //$creneau['jour']);
         $jour = date_create_from_format('Y-m-d', $jourSelected);
         $jour->setTime(0, 0, 0, 0);
 
@@ -145,7 +126,7 @@ class PlanningController extends AbstractController
         // et voilà! 
         //dd($horaireNomSelected, $horaireIdSelected, $jour, $creneauNomSelected, $creneauIdSelected, $user);
         // je suis sur que tu vas finir par t'en sortir :-)
-
+                                                          
         $returnUpdate = $cal->getRdv($horaireIdSelected, $creneauIdSelected, $jour); //, $user);
 
         if ($returnUpdate > 0) {
@@ -154,7 +135,11 @@ class PlanningController extends AbstractController
 
             $entityManager = $this->getDoctrine()->getManager();
             $rdvNew = new Rdv();
-            $rdvNew->setEmail($user);
+            // Suma rempalcer les 3 instructions
+            //  $rdvNew->setEmail($user);
+             $rdvNew->setEmail($email);
+             $rdvNew->setPrenom($prenom);
+             $rdvNew->setNom($nom);
             $rdvNew->setJour($jour);
             $horaireNew = $horaireRepo->find($horaireIdSelected);
             $rdvNew->setHoraire($horaireNew);
@@ -166,17 +151,20 @@ class PlanningController extends AbstractController
             $entityManager->persist($rdvNew);
             $entityManager->flush();
 
-
-            $message = 'The RDV is created';
+            $tmpDay = date_format($jour , 'l');
+            $en = array("Monday", "Tuesday", "Wednesday", "Thursday","Friday" , "Saturday","Sunday");
+            $fr   = array("Lundi", "Mardi", "Mercredi" , "Jeudi","Vendredi" , "Samedi","Dimanche" );
+            $tmpDay = str_replace($en, $fr, $tmpDay);
+                
+            $message = 'Votre Rendez-vous du ' . $tmpDay . ' ' . $jourSelected . ' à ' . 
+                       $horaireNew->getNom() . ' de ' . $creneauNew->getDescription() . ' a été pris en compte  ';
+            
             $this->addFlash('message', $message);
-            $sendContact->execute('prenom', 'toto', 'sumanabrite@gmail.com', 'testRdv');
-
+            $sendContact->execute2($prenom, $nom, $email, $message );
+            // $sendContact->execute2($prenom , $nom ,  $email , $message);
             return $this->redirectToRoute(
-                'mesrdvs',
-                [
-                    // 'rdvs' => $rdvs,
-                    // 'today' => $today,
-                ],
+                'planning',
+                [],
                 Response::HTTP_SEE_OTHER
             );
         } else { // the RDV is not Created
@@ -188,28 +176,63 @@ class PlanningController extends AbstractController
             // dd( $jour) ;
             return $this->redirectToRoute(
                 'planning',
-                [
-                    // 'controller_name' => 'PlanningController',
-                    // 'calendriers'     => $calendriers,
-                    // 'horaires'          => $horaires,
-                    // 'jour1'           => $jour,
-                    // 'jours'           => $jours,
-                ],
+                [],
                 Response::HTTP_SEE_OTHER
             );
         }
     }
-
-
     /**
-     * @Route("/planning/rdv/email", name="get_email")
+     * @Route("/planning/rdvemail/{idH}/{jour}/rdv", name="get_email")
      */
     public function getemail(
-        
-    ): Response
-    //public function rdv( string $jourSelected , Horaire $horaireSelected , Creneau $creneauSelected ): Response
+        Request $request,
 
-    {
+        $idH , 
+        $jour 
+        ): Response
 
-    }
+        {
+            $tempPost = $request->request->get('creneau');
+            // on transforme en tableau
+            $creneauBrut = explode('~', $tempPost);
+            // puis en tableau associatif
+            $creneau = [];
+       
+            foreach ($creneauBrut as $index => $element) {
+                $temp = explode('-->', $element);
+                
+                if ($index == 0) {
+                    $horaireNomSelected = $temp[1]; //$element;
+                }
+                if ($index == 1) {
+                    $horaireIdSelected = $temp[1]; //$element;
+                }
+                if ($index == 2) {
+                    $jourSelected = $temp[1]; //$element;
+                    // $jour = date_create_from_format('Y-m-d', $jourSelected  );
+                    //dd(  $element ,  $jourSelected , $jour , $horaireNomSelected , $horaireIdSelected);
+                }
+                if ($index == 3) {
+                    $creneauNomSelected = $temp[1]; //$element;
+                }
+                if ($index == 4) {
+                    $creneauIdSelected = $temp[1]; // $element;
+                }
+            }
+
+         
+
+        return $this->render('planning/email.html.twig', [
+
+            'horaireNomSelected' => $horaireNomSelected,
+            'horaireIdSelected'  => $horaireIdSelected,
+            'jourSelected'       => $jourSelected,
+            'creneauNomSelected' => $creneauNomSelected,
+            'creneauIdSelected' => $creneauIdSelected,
+
+
+        ]);
+    
+        }
 }
+

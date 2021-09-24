@@ -1,8 +1,6 @@
 
-{% if is_granted("ROLE_ADMIN") %}
 
 <div class=" menubar">
-
 	<nav class=" dark menu-header navbar navbar-expand-lg navbar-dark ">
 		<div class="row col-12 col-md-6 col-lg-4">
 		<div class="d-block col-6"> 
@@ -76,7 +74,16 @@
 								</a>
 
 							</li>
-							
+							<li class="dropdown-item">
+								<a href="#">Boucherie</a>
+								<ul>
+									<li><a href="{{path("article_boucherie_index") }}">Article Boucherie</a></li>
+									<li><a href="{{path("categorie_boucherie_index") }}">Categorie Boucherie</a></li>
+									<li><a href="{{path("measure_index") }}">Measure</a></li>
+									<li><a href="{{path("taux_tva_index") }}">TVA</a></li>
+								</ul>
+							</li>
+
 							
 							<li class="dropdown-item">
 								<a href="#">Rendez-Vous</a>
@@ -118,30 +125,9 @@
 		</li>
 	</ul>
 </div></nav>
-
-
 {% include "menu.html.twig" %}
 </div></div>
-{% endif %}
-<br>
-<div class="container-fluid">
-<div class="row">
-<div class="col-1"></div>
-<div class ="col-3">
-	<a href="https://www.ganapathy.fr/" target="_blank">
-	<img src="/images/uploads/logo1.jpg" alt="logo" class="logo-footer img-fluid mb-2">
-	<i class="fas fa-home"></i>
-	Retour a l'acceuil</a>
-</div>
-
-<div class= "col-5">
-<h5 class="text-center">ce site permet de prendre rendez-vous à l'agence de Bobigny uniquement</h5>
-</div>
-
-<div class ="col-1"></div>
-</div>
-</div>
-<div class="container-fluid">
+<div class="container">
    {% for classStyle, messages in app.flashes %}
      <div class="alert alert-{{ classStyle }}">
        {% for message in messages %}

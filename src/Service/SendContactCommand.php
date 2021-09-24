@@ -52,7 +52,7 @@ class SendContactCommand
               
              ->from($adress)
              ->to('contact@ganapathy.fr')
-             ->subject('Nouveau message de ' . $nom)
+             ->subject('Nouveau message de ' . $nom )
             //  ->text('ça marche');
              ->text($message);
 
@@ -62,5 +62,44 @@ class SendContactCommand
     // return Command::SUCCESS;
     return true;
     // }
+  }
+  public function execute2(string $prenom, string $nom,  string $email, string $message ):bool
+  {
+    $user = new User();
+    // $toSend = $this->contactRepository->findBy(['isSend' => false]);
+    // $adress = 'sumanabrite@gmail.com';
+    $adress = strval($email);
+
+    // dd($prenom, $nom, $email, $message);
+    // $adress = $this->contactRepository->findBy(['email']); 
+
+    // foreach ($toSend as $mail) {
+       $email = new TemplatedEmail(); 
+
+                $email
+              
+             ->from($adress)
+             ->to('contact@ganapathy.fr')
+             ->subject('Nouveau Rdv de ' . $nom  . $prenom)
+            //  ->text('ça marche');
+             ->text($message);
+
+       $this->mailer->send($email);
+
+       
+       $email2 = new TemplatedEmail(); 
+
+                $email2
+              
+             ->from('contact@ganapathy.fr')
+             ->to(  $adress )
+             ->subject('Votre RDV auprès de Ganapathy - Transfert d\'' . 'argent ' . $nom )
+            //  ->text('ça marche');
+             ->text($message);
+
+       $this->mailer->send($email2);
+
+    return true;
+
   }
 }

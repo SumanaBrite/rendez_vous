@@ -38,17 +38,27 @@ class Rdv
      */
     private $creneau;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="rdvs")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $email;
 
     /**
      * @ORM\ManyToOne(targetEntity=Horaire::class)
      * @ORM\JoinColumn(nullable=false)
      */
     private $horaire;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=40)
+     */
+    private $prenom;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $nom;
 
     
 
@@ -94,18 +104,7 @@ class Rdv
         return $this;
     }
 
-    public function getEmail(): ?User
-    {
-        return $this->email;
-    }
-
-    public function setEmail(?User $email): self
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
+    
     public function getHoraire(): ?Horaire
     {
         return $this->horaire;
@@ -114,6 +113,42 @@ class Rdv
     public function setHoraire(?Horaire $horaire): self
     {
         $this->horaire = $horaire;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
 
         return $this;
     }
