@@ -7,7 +7,7 @@
 
                 {% for jour in jours %}
                     
-					<th> {{  jour | date("l m/d/Y") | replace({'Monday': 'Lundi', 'Tuesday': "Mardi", 'Wednesday':'Mercredi',
+					<th class="text-center"> {{  jour | date("l m/d/Y") | replace({'Monday': 'Lundi', 'Tuesday': "Mardi", 'Wednesday':'Mercredi',
                                                      'Thursday': 'Jeudi', 'Friday':'Vendredi',
                                                      'Saturday':'Samedi', 'Sunday':'Dimanche'} ) }}</th>
 
