@@ -1,95 +1,107 @@
-<table class="table table text-center table-bordered table-striped">
-	<thead>
-		<tr>
-			{# <th>Horaires</th> #}
-			{% set jour = jour1  %}
+   
+    <table class="table table text-center table-bordered table-striped">
+		<thead>
+			<tr>
+                {# <th>Horaires</th> #}
+                {% set jour = jour1  %}
 
-			{% for jour in jours %}
-
-
-			
                 {% for jour in jours %}
                     
-					<th class="text-center"> {{  jour | date("l m/d/Y") | replace({'Monday': 'Lundi', 'Tuesday': "Mardi", 'Wednesday':'Mercredi' main
+					<th> {{  jour | date("l d/m/Y") | replace({'Monday': 'Lundi', 'Tuesday': "Mardi", 'Wednesday':'Mercredi',
                                                      'Thursday': 'Jeudi', 'Friday':'Vendredi',
                                                      'Saturday':'Samedi', 'Sunday':'Dimanche'} ) }}</th>
 
-			{% endfor %}
-		</tr>
-	</thead>
+                {% endfor %}
+			</tr>
+		</thead>
 
 
-	<tbody>
-		{% for horaire in horaires %}
-			<tr>
-				{# <td>{{  horaire.nom }}</td> #}
+		<tbody>
+                {% for horaire in horaires %}
+                   <tr>
+                   {# <td>{{  horaire.nom }}</td> #}
+					
+                   
+                    {% for jour in jours %}
+                         {% set jourSelected = jour|date("d.m.Y") %} 
+                        {% set nbCreneau = 0 %}
 
-
-				{% for jour in jours %}
-					{% set jourSelected = jour|date("m.d.Y") %}
-					{% set nbCreneau = 0 %}
-
-					<td>
-						<div>
-							{# <form method="post" action="{{ path('fiche_rdv' , {'idH': horaire.id , 'jour': jourSelected #}
-							<form method="post" action="{{ path('get_email' , {'idH': horaire.id , 'jour': jourSelected }) }}">
-
-								{% for calendrier in calendriers  %}
-									{% if ( horaire.nom == calendrier.horaire and
+                         <td>
+                            <div>
+                                {# <form method="post" action="{{ path('fiche_rdv' , {'idH': horaire.id , 'jour': jourSelected #}
+                                <form method="post" action="{{ path('get_email' , {'idH': horaire.id , 'jour': jourSelected
+                                                         
+                                                            })  }}">
+                                
+                                {% for calendrier in calendriers  %}
+                                    {% if ( horaire.nom == calendrier.horaire and
                                          calendrier.jour == jour ) %}
-										{% set nbCreneau = nbCreneau + 1 %}
+                                        {% set nbCreneau = nbCreneau + 1 %}
+                                
+                                    {% endif %}
+                        
+                         
+                                {% endfor %} 
 
-									{% endif %}
+                                {% if nbCreneau > 0  %}
 
-
-								{% endfor %}
-
-								{% if nbCreneau > 0  %}
-
-									{% set nbCreneau = 0 %}
-									{% for calendrier in calendriers  %}
-										{% if ( horaire.nom == calendrier.horaire and
+                                     {% set nbCreneau = 0 %}
+                                    {% for calendrier in calendriers  %}
+                                        {% if ( horaire.nom == calendrier.horaire and
                                             calendrier.jour == jour ) %}
+                                           
+                                            <div>
 
-											<div>
+                                             {% if nbCreneau ==  0  %}
+                                        <input type="radio" id="RAD~{{ nbCreneau }}" checked="checked"  name="creneau" 
+        value=
+        "horaire-->{{ calendrier.horaire }}~horaireId-->{{ calendrier.horaireId }}~jour-->{{ calendrier.jour|date('Y-m-d') }}~creneau-->{{ calendrier.creneau }}~creneauId-->{{ calendrier.creneauId }}">
+       
+                                             {% else %}
+                                             <input type="radio" id="RAD~{{ nbCreneau }}" name="creneau" 
+        value=
+        "horaire-->{{ calendrier.horaire }}~horaireId-->{{ calendrier.horaireId }}~jour-->{{ calendrier.jour|date('Y-m-d') }}~creneau-->{{ calendrier.creneau }}~creneauId-->{{ calendrier.creneauId }}">
+       
+                                            {% endif %}
+        <label for="RAD~{{ nbCreneau }}">{{ horaire.nom }}{{ calendrier.creneau }}</label>
+                                           </div>
+                                            {% set nbCreneau = nbCreneau + 1 %}
+                                        {% endif %}
+                            
+                            
+                                    {% endfor %} 
+                                   
+                                    {# {% if is_granted("IS_AUTHENTICATED_FULLY") %}   #}
+                            
+                                        {% if nbCreneau > 0  %}
+                                
+                                        {# {% set jourSelected = calendrier.jour|date("m/d/Y") %} #}
+                                            {# <button class="btn btn-secondary" type="submit">Réserver</button> #}
+                                            <input class="btn btn-secondary" type="submit" value="Réserver">
 
-												{% if nbCreneau ==  0  %}
-													<input type="radio" id="RAD~{{ nbCreneau }}" checked="checked" name="creneau" value="horaire-->{{ calendrier.horaire }}~horaireId-->{{ calendrier.horaireId }}~jour-->{{ calendrier.jour|date('Y-m-d') }}~creneau-->{{ calendrier.creneau }}~creneauId-->{{ calendrier.creneauId }}">
+                                        {% endif %}  
+                            
+                                    {# {% endif %} #}
+                                
+                                {% else %}
+                                     <div> Pas de créneau disponible</div>
+                                {% endif %}
+                                </form>
+                                
+                            </div>
+                            <div>
+                                
+                            </div>
+                        </td>
+                         
 
-												{% else %}
-													<input type="radio" id="RAD~{{ nbCreneau }}" name="creneau" value="horaire-->{{ calendrier.horaire }}~horaireId-->{{ calendrier.horaireId }}~jour-->{{ calendrier.jour|date('Y-m-d') }}~creneau-->{{ calendrier.creneau }}~creneauId-->{{ calendrier.creneauId }}">
+                    {% endfor  %}
+                     
+                
+				    </tr>
+                {% endfor %}
+        
+                
+		</tbody>
 
-												{% endif %}
-												<label for="RAD~{{ nbCreneau }}">{{ horaire.nom }}{{ calendrier.creneau }}</label>
-											</div>
-											{% set nbCreneau = nbCreneau + 1 %}
-										{% endif %}
-
-
-									{% endfor %}
-
-									{# {% if is_granted("IS_AUTHENTICATED_FULLY") %}   #}
-
-									{% if nbCreneau > 0  %}
-
-										{# {% set jourSelected = calendrier.jour|date("m/d/Y") %} #}
-										{# <button class="btn btn-secondary" type="submit">Réserver</button> #}
-									<input class="btn btn-secondary" type="submit" value="Réserver"> {% endif %}
-
-									{# {% endif %} #}
-
-								    {% else %}
-									<div>
-										Pas de créneau disponible
-                                    </div>
-								{% endif %}
-							</form>
-
-						</div>
-
-					</td>
-				{% endfor  %}
-            </tr>
-		{% endfor %}
-    </tbody>
-</table>
+	</table>
