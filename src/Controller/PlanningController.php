@@ -157,7 +157,7 @@ class PlanningController extends AbstractController
             $tmpDay = str_replace($en, $fr, $tmpDay);
                 
             $message = 'Votre Rendez-vous du ' . $tmpDay . ' ' . $jourSelected . ' à ' . 
-                       $horaireNew->getNom() . ' de ' . $creneauNew->getDescription() . ' a été pris en compte  ';
+                       $horaireNew->getNom() . $creneauNew->getDescription() . ' a été pris en compte  ';
             
             $this->addFlash('message', $message);
             $sendContact->execute2($prenom, $nom, $email, $message );
