@@ -131,27 +131,23 @@
 	<a href="https://www.ganapathy.fr/" target="_blank" style="font-size:1.5rem">
 	<img src="/images/uploads/logo1.jpg" alt="logo" class="logo-footer img-fluid mb-2">
 	<i class="fas fa-home"></i>
-	Boucherie</a>
+	Retour a l'acceuil</a>
 </div>
 
 <div class= "col-5">
 <h5 class="text-center">Ce site permet de prendre des rendez-vous à l'agence de Bobigny uniquement</h5>
-<p>Merci de contacter par teléphone pour prendre rendez-vous dans autre agence</p>
+<p>Merci de contacter par teléphone pour prendre rendez-vous dans une autre agence</p>
 </div>
 
 <div class ="col-1"></div>
 </div>
 </div>
-<hr>
-<div class="container">
+<div class="container-fluid">
    {% for classStyle, messages in app.flashes %}
      <div class="alert alert-{{ classStyle }}">
        {% for message in messages %}
-         <h5>{{ message }}</h5>
+         <p>{{ message }}</p>
        {% endfor %}
      </div>
-	
    {% endfor %}
-   
-
 </div>

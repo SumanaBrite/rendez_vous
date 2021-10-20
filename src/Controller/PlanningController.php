@@ -151,26 +151,27 @@ class PlanningController extends AbstractController
             $entityManager->persist($rdvNew);
             $entityManager->flush();
 
-            $tmpDay = date_format($jour , 'l');
+            // $tmpDay = date_format($jour , 'l');
+            $tmpDay = date_format($jour , 'd-m-Y');
             $en = array("Monday", "Tuesday", "Wednesday", "Thursday","Friday" , "Saturday","Sunday");
             $fr   = array("Lundi", "Mardi", "Mercredi" , "Jeudi","Vendredi" , "Samedi","Dimanche" );
             $tmpDay = str_replace($en, $fr, $tmpDay);
                 
-            $message = 'Votre Rendez-vous du ' . $tmpDay . ' ' . $jourSelected . ' à ' . 
-                       $horaireNew->getNom() . $creneauNew->getDescription() . ' a été pris en compte  ';
+            $message = 'Votre Rendez-vous du ' . $tmpDay  . ' à ' . 
+                       $horaireNew->getNom() . $creneauNew->getDescription() . ' a été pris en compte. Merci de consulter vôtre boite mail ';
             
             $this->addFlash('message', $message);
             $sendContact->execute2($prenom, $nom, $email, $message );
             // $sendContact->execute2($prenom , $nom ,  $email , $message);
             return $this->redirectToRoute(
-                'planning',
+                'planning_message',
                 [],
                 Response::HTTP_SEE_OTHER
             );
         } else { // the RDV is not Created
 
 
-            $message = 'Anomalie prise de Rendez-vous, Veuillez ressaisir le RDV';
+            $message = 'Rendez-vous pour ce creneau n\'est pas libre, Veuillez ressaisir un nouveau RDV';
             $this->addFlash('message', $message);
 
             // dd( $jour) ;
@@ -234,5 +235,17 @@ class PlanningController extends AbstractController
         ]);
     
         }
+
+        /**
+     * @Route("/planning/message", name="planning_message")
+     */
+    public function message(): Response
+    {
+        return $this->render('planning/message.html.twig', [
+            'controller_name' => 'PlanningController',
+        ]);
+    }
+
+
 }
 

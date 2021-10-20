@@ -53,7 +53,7 @@ class RdvController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
 
-            $rdv->setEmail($user);
+            // $rdv->setEmail($user);
             $entityManager->persist($rdv);
             $entityManager->flush();
 
