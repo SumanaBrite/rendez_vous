@@ -93,7 +93,7 @@ class SendContactCommand
               
              ->from('contact@ganapathy.fr')
              ->to(  $adress )
-             ->subject('Votre RDV auprès de Ganapathy - Transfert d\'' . 'argent ' . $nom )
+             ->subject('Votre RDV auprès de Ganapathy:'. $nom . ' ' .$prenom)
             //  ->text('ça marche');
              ->text($message);
 
